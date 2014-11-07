@@ -6,7 +6,7 @@ $app_name = get_appname();
 $drain_token = $_SERVER['HTTP_LOGPLEX_DRAIN_TOKEN'];
 $msg_count = $_SERVER['HTTP_LOGPLEX_MSG_COUNT'];
 
-if ($appname === false) {
+if ($app_name === false) {
   syslog(LOG_WARNING, "Invalid request format: $path");
   http_response_code(400);
   exit(1);
