@@ -19,16 +19,23 @@ class Storage {
         return file_get_contents($this->buildPath($file));
     }
     
-    public function fileWrite($file, $content) {
-        return file_put_contents($this->buildPath($file), $content);
+    public function fileWrite($file, $content, $ctx = null) {
+        return file_put_contents($this->buildPath($file), $content, 0, $this->gsContext($ctx));
     }
     
-    public function fileAppend($file, $content) {
-        return file_put_contents($this->buildPath($file), $content, FILE_APPEND);
+    public function fileAppend($file, $content, $ctx = null) {
+        return file_put_contents($this->buildPath($file), $content, FILE_APPEND, $this->gsContext($ctx));
     }
     
     public function buildPath($path = '') {
         return "gs://{$this->bucket}/$path";
+    }
+    
+    public function gsContext($ctx = null) {
+        if ($ctx == null) $ctx = ['Content-Type' => 'text/plain'];
+        return stream_context_create([
+            'gs' => $ctx,
+        ]);
     }
     
 }
