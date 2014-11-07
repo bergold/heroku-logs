@@ -9,10 +9,12 @@ if (!$m || $m == 0) {
   http_response_code(400);
   exit(1);
 }
-$header = http_get_request_headers();
-  array_walk($final, function($val, $key) use(&$data){
-  	$data .= "$val: $key;";
-});
+foreach($_SERVER as $i=>$val) {
+  if (strpos($i, 'HTTP_') === 0) {
+    $name = str_replace(array('HTTP_', '_'), array('', '-'), $i);
+    $data .= "$name: $val;";
+  }
+}
 $data .= @file_get_contents('php://input');
 
 syslog(LOG_DEBUG, $data);
