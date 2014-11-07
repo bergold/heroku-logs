@@ -17,7 +17,7 @@ if ($app_name === false) {
 $data = @file_get_contents('php://input');
 
 $storage_handle = Storage::fromDefaultBucket();
-$storage_handle->fileAppend("logs/$app_name", ["\n", $data]);
+$storage_handle->fileAppend("logs/$app_name.log", ["\n", $data]);
 
 syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token)");
 
