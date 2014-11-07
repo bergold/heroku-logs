@@ -11,20 +11,24 @@ class Storage {
     
     private $bucket;
     
-    public function __construct($bucket) {
+    function __construct($bucket) {
         $this->$bucket = $bucket;
     }
     
-    public function readFile($file) {
+    public function fileRead($file) {
         return file_get_contents($this->buildPath($file));
     }
     
-    public function writeFile($file, $content) {
+    public function fileWrite($file, $content) {
         return file_put_contents($this->buildPath($file), $content);
     }
     
+    public function fileAppend($file, $content) {
+        return file_put_contents($this->buildPath($file), $content, FILE_APPEND);
+    }
+    
     public function buildPath($path = '') {
-        return "gs://{$this->$bucket}/$path";
+        return "gs://" . $this->$bucket . "/$path";
     }
     
 }

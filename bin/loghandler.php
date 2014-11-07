@@ -16,9 +16,8 @@ if ($appname === false) {
 
 $data = @file_get_contents('php://input');
 
-// [Todo] Write the new logdata to the correct log file.
 $storage_handle = Storage::fromDefaultBucket();
-
+$storage_handle->fileAppend("logs/$app_name", ["\n", $data]);
 
 syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token)");
 
