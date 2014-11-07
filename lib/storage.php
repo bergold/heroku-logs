@@ -23,8 +23,12 @@ class Storage {
         return file_put_contents($this->buildPath($file), $content, 0, $this->gsContext($ctx));
     }
     
-    public function fileAppend($file, $content, $ctx = null) {
-        return file_put_contents($this->buildPath($file), $content, FILE_APPEND, $this->gsContext($ctx));
+    public function fileAppend($file, $content) {
+        $fh = fopen($this->buildPath($file), 'a');
+        if ($fh === false) throw new Exception('File could not be opened.');
+        fwrite($fh, $content);
+        fclose($fh);
+        return true;
     }
     
     public function buildPath($path = '') {
