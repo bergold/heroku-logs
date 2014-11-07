@@ -6,4 +6,10 @@ threadsafe: true
 
 handlers:
 - url: /syslog/.*
-  script: syslog.php
+  script: bin/loghandler.php
+  
+- url: /api/.*
+  script: bin/apihandler.php
+
+- url: /init
+  script: bin/init.php
