@@ -24,11 +24,11 @@ class Storage {
     }
     
     public function fileAppend($file, $content) {
-        $fh = fopen($this->buildPath($file), 'a');
-        if ($fh === false) throw new Exception('File could not be opened.');
-        fwrite($fh, $content);
-        fclose($fh);
-        return true;
+        $data = '';
+        if (file_exists($this->buildPath($file)))
+            $data = $this->fileRead($file);
+        $data .= $content;
+        return $this->fileWrite($file, $content);
     }
     
     public function buildPath($path = '') {

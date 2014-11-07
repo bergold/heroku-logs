@@ -15,9 +15,10 @@ if ($app_name === false) {
 // [Todo] Validate app_name with drain_token by checking a config file.
 
 $data = @file_get_contents('php://input');
+$data .= "\n";
 
 $storage_handle = Storage::fromDefaultBucket();
-$storage_handle->fileAppend("logs/$app_name.log", ["\n", $data]);
+$storage_handle->fileAppend("logs/$app_name.log", $data);
 
 syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token)");
 
