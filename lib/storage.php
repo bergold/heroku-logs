@@ -12,7 +12,7 @@ class Storage {
     private $bucket;
     
     function __construct($bucket) {
-        $this->$bucket = $bucket;
+        $this->bucket = $bucket;
     }
     
     public function fileRead($file) {
@@ -28,7 +28,7 @@ class Storage {
     }
     
     public function buildPath($path = '') {
-        return "gs://" . $this->$bucket . "/$path";
+        return "gs://{$this->bucket}/$path";
     }
     
 }
