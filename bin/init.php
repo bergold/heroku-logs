@@ -1,5 +1,5 @@
 <?php
-require_once '/lib/storage.php';
+require_once 'lib/storage.php';
 
 header("Content-Type: test/plain");
 

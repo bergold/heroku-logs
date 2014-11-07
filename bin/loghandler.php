@@ -1,6 +1,6 @@
 <?php
-require_once '/lib/util.php';
-require_once '/lib/storage.php';
+require_once 'lib/util.php';
+require_once 'lib/storage.php';
 
 $app_name = get_appname();
 $drain_token = $_SERVER['HTTP_LOGPLEX_DRAIN_TOKEN'];
