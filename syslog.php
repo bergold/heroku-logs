@@ -1,20 +1,25 @@
 <?php
 $path_prefix = '\/syslog\/';
 
-$data = '';
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$m = preg_match("/(?<=^$path_prefix)[a-z-]*$/", $path, $m);
+$m = preg_match("/(?<=^$path_prefix)[a-z-]*$/", $path, $match);
 if (!$m || $m == 0) {
-  syslog(LOG_WARNING, "Invalid requestformat: $path");
+  syslog(LOG_WARNING, "Invalid request format: $path");
   http_response_code(400);
   exit(1);
 }
-foreach ($_SERVER as $i => $val) {
-  if (strpos($i, 'HTTP_') === 0) {
-    $name = str_replace(array('HTTP_', '_'), array('', '-'), $i);
-    $data .= "$name: $val;";
-  }
-}
-$data .= @file_get_contents('php://input');
 
-syslog(LOG_DEBUG, $data);
+$app_name = $match[0];
+$drain_token = $_SERVER['HTTP_LOGPLEX_DRAIN_TOKEN'];
+$msg_count = $_SERVER['HTTP_LOGPLEX_MSG_COUNT'];
+
+// [Todo] Validate app_name with drain_token by checking a config file.
+
+$data = @file_get_contents('php://input');
+
+// [Todo] Write the new logdata to the correct log file.
+
+syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token)");
+
+http_response_code(204);
+exit(0);
