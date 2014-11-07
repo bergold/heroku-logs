@@ -9,7 +9,7 @@ if (!$m || $m == 0) {
   http_response_code(400);
   exit(1);
 }
-foreach($_SERVER as $i=>$val) {
+foreach ($_SERVER as $i => $val) {
   if (strpos($i, 'HTTP_') === 0) {
     $name = str_replace(array('HTTP_', '_'), array('', '-'), $i);
     $data .= "$name: $val;";
