@@ -1,6 +1,8 @@
 <?php
 require_once 'lib/storage.php';
 
-$sh = Storage::fromDefaultBucket();
+header('Content-Type: text/plain');
 
-unlink($sh->buildPath('logs/iniii.log'));
+$sh = Storage::fromDefaultBucket('/logs/');
+
+$sh->fileAppend('test.log', "I want to append this\n");
