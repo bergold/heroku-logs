@@ -4,29 +4,29 @@ use google\appengine\api\cloud_storage\CloudStorageTools;
 class Storage {
     
     /// Creates a new Storage instance providing access to the deault bucket.
-    public static function fromDefaultBucket($pathprefix = '/') {
+    public static function fromDefaultBucket($pathprefix = "/") {
         $default_bucket = CloudStorageTools::getDefaultGoogleStorageBucketName();
-        if ($default_bucket == '') throw new Exception('No default bucket defined');
+        if ($default_bucket == "") throw new Exception("No default bucket defined");
         return new Storage($default_bucket, $pathprefix);
     }
     
     private $bucket;
     
-    function __construct($bucket, $pathprefix = '/') {
+    function __construct($bucket, $pathprefix = "/") {
         $this->bucket = $bucket . $pathprefix;
     }
     
-    public function buildPath($path = '') {
+    public function buildPath($path = "") {
         return "gs://{$this->bucket}$path";
     }
     
     public function buildContext($ctx) {
         return stream_context_create([
-            'gs' => $ctx
+            "gs" => $ctx
         ]);
     }
     
-    public function dirRead($path = '') {
+    public function dirRead($path = "") {
         
     }
     
@@ -43,7 +43,7 @@ class Storage {
     
     public function fileAppend($file, $content) {
         $path = $this->buildPath($file);
-        $data = file_exists($path) ? $this->fileRead($file) : '';
+        $data = file_exists($path) ? $this->fileRead($file) : "";
         $data .= $content;
         return $this->fileWrite($file, $data);
     }
