@@ -30,6 +30,10 @@ class Storage {
         
     }
     
+    public function fileExists($file) {
+        return file_exists($this->buildPath($file));
+    }
+    
     public function fileRead($file) {
         return file_get_contents($this->buildPath($file));
     }

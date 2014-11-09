@@ -3,11 +3,18 @@ require_once 'storage.php';
 
 class Logger {
     
-    private static $storage;
+    private static $storage = null;
     
     /// Sets the $storage instance.
     public static setStorageInstance($s) {
         self::$storage = $s;
+    }
+    
+    /// Returns the Socket instance.
+    /// Throws an Exception if no Socket instance is set.
+    public static function getStorageInstance() {
+        if (self::$storage == null) throw new Exception("No Storage instance sed.");
+        return self::$storage;
     }
     
     /// If $name isn't specified, this function returns a list of all loggers.
@@ -15,7 +22,10 @@ class Logger {
     public static function get($name = null) {
         if ($name == null) return self::getList();
         
-        
+        $sh = self::getStorageInstance();
+        $file = $name . ".log";
+        if (!$sh->fileExists($file)) return false;
+        return new Logger($file);
     }
     
     /// Returns a list of all registered loggers
@@ -23,13 +33,14 @@ class Logger {
         
     }
     
+    private $file;
     
-    function __construct() {
-        
+    function __construct($file) {
+        $this->file = $file;
     }
     
     public function append($data) {
-        
+        self::getStorageInstance()->fileAppend($this->file, $data);
     }
     
     public function fetch($query) {
