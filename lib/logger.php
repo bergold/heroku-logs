@@ -31,11 +31,11 @@ class Logger {
     /// Returns a list of all registered loggers
     private static function getList() {
         $sh = self::getStorageInstance();
-        $logger = array();
+        $loggers = array();
         foreach ($sh->dirRead() as $file) {
-            $logger[] = new Logger($file);
+            $loggers[] = new Logger($file);
         }
-        return $logger;
+        return $loggers;
     }
     
     /// Creates a new logger.
@@ -67,6 +67,10 @@ class Logger {
     
     function __construct($file) {
         $this->file = $file;
+    }
+    
+    public function getName() {
+        return substr($this->file, 0, -4);
     }
     
     public function append($data) {

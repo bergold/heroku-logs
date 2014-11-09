@@ -7,7 +7,14 @@ require_once 'lib/logger.php';
 $router = new Router(path("/api"));
 
 $router->when("/apps", function () {
-    echo "Apps";
+    $storage_handle = Storage::fromDefaultBucket("/logs/");
+    Logger::setStorageInstance($storage_handle);
+    
+    $loggers = Logger::get();
+    $loggers = array_map(function($l) { return $l->getName(); }, $loggers);
+    
+    header("Content-Type: application/json");
+    echo json_encode($loggers);
 });
 
 $router->when("/:appname/logs", function ($params) {
@@ -16,7 +23,6 @@ $router->when("/:appname/logs", function ($params) {
 
     $logger = Logger::get($params['appname']);
     if ($logger === false) {
-        echo "logger not found";
         http_response_code(404);
         exit(1);
     }
@@ -26,8 +32,7 @@ $router->when("/:appname/logs", function ($params) {
 });
 
 $router->when("/:appname/drains", function ($params) {
-    echo "Drains: ";
-    var_dump($params);
+    http_response_code(501);
 });
 
 $router->otherwise(function () {

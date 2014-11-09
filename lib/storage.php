@@ -27,13 +27,16 @@ class Storage {
     }
     
     public function dirRead($path = "") {
-        $dh = opendir($this->buildPath($path));
+        $path = $this->buildPath($path);
+        $dh = opendir($path);
+        $files = array();
         while (false !== ($next = readdir($dh))) {
-            if (is_file($next)) {
-                yield $next;
+            if (is_file($path . $next)) {
+                $files[] = $next;
             }
         }
         closedir($dh);
+        return $files;
     }
     
     public function fileExists($file) {
