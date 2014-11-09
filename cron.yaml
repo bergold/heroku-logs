@@ -1,0 +1,4 @@
+cron:
+- description: daily summary job
+  url: /api/summary
+  schedule: every 24 hours

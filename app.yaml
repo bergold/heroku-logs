@@ -8,6 +8,9 @@ handlers:
 - url: /syslog/.*
   script: bin/loghandler.php
   
+- url: /api/summary
+  script: bin/summary.php
+  
 - url: /api/.*
   script: bin/apihandler.php
 
