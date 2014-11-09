@@ -6,7 +6,7 @@ class Logger {
     private static $storage = null;
     
     /// Sets the $storage instance.
-    public static setStorageInstance($s) {
+    public static function setStorageInstance($s) {
         self::$storage = $s;
     }
     
@@ -40,7 +40,7 @@ class Logger {
     }
     
     public function append($data) {
-        self::getStorageInstance()->fileAppend($this->file, $data);
+        return self::getStorageInstance()->fileAppend($this->file, $data);
     }
     
     public function fetch($query) {
@@ -48,7 +48,7 @@ class Logger {
     }
     
     public function validateDrain($token) {
-        
+        return true;
     }
     
     /// Returns a list of all draintokens.
