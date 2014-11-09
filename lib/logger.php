@@ -40,8 +40,12 @@ class Logger {
         return new Logger($file);
     }
     
+    /// Removes a logger.
+    /// This function removes the log file and makes it so unavailable for logging.
     public static function remove($name) {
-        
+        $sh = self::getStorageInstance();
+        $file = $name . ".log";
+        return $sh->fileDelete($file);
     }
     
     /// Returns a list of all registered loggers

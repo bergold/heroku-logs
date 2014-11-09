@@ -45,6 +45,10 @@ class Storage {
             return file_put_contents($this->buildPath($file), $content, 0, $this->buildContext($ctx));
     }
     
+    public function fileDelete($file) {
+        return @unlink($this->buildPath($file));
+    }
+    
     public function fileAppend($file, $content) {
         $path = $this->buildPath($file);
         if (!file_exists($path)) return false;
