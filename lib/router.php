@@ -3,8 +3,12 @@
 // class Router
 class Router {
     
-    public $path = "";
+    private $path = "";
     private $matched = false;
+    
+    function __construct($path) {
+        $this->path = $path;
+    }
     
     public function when($path, $handler) {
         if ($this->matched) return;

@@ -28,6 +28,11 @@ class Logger {
         return new Logger($file);
     }
     
+    /// Returns a list of all registered loggers
+    private static function getList() {
+        
+    }
+    
     /// Creates a new logger.
     /// This function creates a new log file and returns the Logger instance.
     /// It returns false if the name is not available or writing the file fails.
@@ -53,11 +58,6 @@ class Logger {
         return $sh->fileDelete($file);
     }
     
-    /// Returns a list of all registered loggers
-    private static function getList() {
-        
-    }
-    
     private $file;
     
     function __construct($file) {
@@ -69,7 +69,7 @@ class Logger {
     }
     
     public function fetch($query) {
-        
+        return self::getStorageInstance()->fileRead($this->file);
     }
     
     public function validateDrain($token) {
