@@ -21,7 +21,7 @@ Logger::setStorageInstance($storage_handle);
 
 $logger = Logger::get($app_name);
 if ($logger === false) {
-    syslog(LOG_WARNING, "For the name '$app_name' is no logger registered.");
+    syslog(LOG_WARNING, "For the app '$app_name' is no logger registered.");
     http_response_code(404);
     exit(1);
 }
