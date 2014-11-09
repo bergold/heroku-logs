@@ -28,6 +28,22 @@ class Logger {
         return new Logger($file);
     }
     
+    /// Creates a new logger.
+    /// This function creates a new log file and returns the Logger instance.
+    /// It returns false if the name is not available or writing the file fails.
+    public static function create($name) {
+        if (self::get($name) !== false) return false;
+        $sh = self::getStorageInstance();
+        $file = $name . ".log";
+        $succeed = $sh->fileWrite($file, '', [ "Content-Type" => "text/plain", "metadata" => [ "drains" => "[]" ] ]);
+        if ($succeed === false) return false;
+        return new Logger($file);
+    }
+    
+    public static function remove($name) {
+        
+    }
+    
     /// Returns a list of all registered loggers
     private static function getList() {
         
