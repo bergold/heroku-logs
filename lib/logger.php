@@ -30,7 +30,12 @@ class Logger {
     
     /// Returns a list of all registered loggers
     private static function getList() {
-        
+        $sh = self::getStorageInstance();
+        $logger = array();
+        foreach ($sh->dirRead() as $file) {
+            $logger[] = new Logger($file);
+        }
+        return $logger;
     }
     
     /// Creates a new logger.

@@ -27,7 +27,13 @@ class Storage {
     }
     
     public function dirRead($path = "") {
-        
+        $dh = opendir($this->buildPath($path));
+        while (false !== ($next = readdir($dh))) {
+            if (is_file($next)) {
+                yield $next;
+            }
+        }
+        closedir($dh);
     }
     
     public function fileExists($file) {
