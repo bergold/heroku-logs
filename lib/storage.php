@@ -47,7 +47,8 @@ class Storage {
     
     public function fileAppend($file, $content) {
         $path = $this->buildPath($file);
-        $data = file_exists($path) ? $this->fileRead($file) : "";
+        if (!file_exists($path)) return false;
+        $data = $this->fileRead($file);
         $data .= $content;
         return $this->fileWrite($file, $data);
     }
