@@ -10,6 +10,7 @@ handlers:
   
 - url: /api/summary
   script: bin/summary.php
+  login: admin
   
 - url: /api/.*
   script: bin/apihandler.php
