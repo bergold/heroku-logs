@@ -35,7 +35,12 @@ class Logger {
         if (self::get($name) !== false) return false;
         $sh = self::getStorageInstance();
         $file = $name . ".log";
-        $succeed = $sh->fileWrite($file, '', [ "Content-Type" => "text/plain", "metadata" => [ "drains" => "[]" ] ]);
+        $succeed = $sh->fileWrite($file, '', [
+            "Content-Type" => "text/plain",
+            "metadata" => [
+                "drains" => "-"
+            ]
+        ]);
         if ($succeed === false) return false;
         return new Logger($file);
     }
