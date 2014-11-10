@@ -41,6 +41,7 @@ if (!$succeed) {
 }
 
 syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token).");
+syslog(LOG_DEBUG, $data);
 
 http_response_code(204);
 exit(0);
