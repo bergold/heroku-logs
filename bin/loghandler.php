@@ -14,6 +14,7 @@ if ($app_name === false) {
 }
 
 $data = @file_get_contents("php://input");
+$data = newline_ifabsent($data);
 
 $storage_handle = Storage::fromDefaultBucket("/logs/");
 Logger::setStorageInstance($storage_handle);

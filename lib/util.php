@@ -14,3 +14,8 @@ function get_appname($prefix = "/syslog/") {
     if (!$m || $m == 0) return false;
     return $match[0];
 }
+
+function newline_ifabsent($str) {
+    $str = rtrim($str, "\r\n");
+    return $str . "\n";
+}
