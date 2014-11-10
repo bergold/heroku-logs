@@ -18,3 +18,14 @@ handlers:
 
 - url: /init
   script: bin/init.php
+
+- url: /
+  static_files: web/landing.html
+  upload: web/landing.html
+  
+- url: /app/
+  static_files: web/app.html
+  upload: web/app.html
+  
+- url: /assets
+  static_dir: web/assets
