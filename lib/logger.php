@@ -1,6 +1,10 @@
 <?php
 require_once 'storage.php';
 
+stream_context_set_default([
+    "gs" => [ "Content-Type" => "text/plain" ]
+]);
+
 class Logger {
     
     private static $storage = null;
@@ -45,12 +49,7 @@ class Logger {
         if (self::get($name) !== false) return false;
         $sh = self::getStorageInstance();
         $file = $name . ".log";
-        $succeed = $sh->fileWrite($file, '', [
-            "Content-Type" => "text/plain",
-            "metadata" => [
-                "drains" => "-"
-            ]
-        ]);
+        $succeed = $sh->fileWrite($file, '');
         if ($succeed === false) return false;
         return new Logger($file);
     }

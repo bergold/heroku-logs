@@ -58,12 +58,12 @@ class Storage {
         return @unlink($this->buildPath($file));
     }
     
-    public function fileAppend($file, $content) {
+    public function fileAppend($file, $content, $ctx = null) {
         $path = $this->buildPath($file);
         if (!file_exists($path)) return false;
         $data = $this->fileRead($file);
         $data .= $content;
-        return $this->fileWrite($file, $data);
+        return $this->fileWrite($file, $data, $ctx);
     }
     
 }
