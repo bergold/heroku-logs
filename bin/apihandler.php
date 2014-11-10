@@ -6,7 +6,7 @@ require_once 'lib/logger.php';
 
 $router = new Router(path("/api"));
 
-$router->when("/apps", function () {
+$router->get("/apps", function () {
     $storage_handle = Storage::fromDefaultBucket("/logs/");
     Logger::setStorageInstance($storage_handle);
     
@@ -17,7 +17,15 @@ $router->when("/apps", function () {
     echo json_encode($loggers);
 });
 
-$router->when("/:appname/logs", function ($params) {
+$router->post("/apps", function () {
+    http_response_code(501);
+});
+
+$router->delete("/apps", function () {
+    http_response_code(501);
+});
+
+$router->get("/:appname/logs", function ($params) {
     $storage_handle = Storage::fromDefaultBucket("/logs/");
     Logger::setStorageInstance($storage_handle);
 
@@ -31,7 +39,27 @@ $router->when("/:appname/logs", function ($params) {
     echo $logger->fetch(null);
 });
 
-$router->when("/:appname/drains", function ($params) {
+$router->get("/:appname/drains", function ($params) {
+    http_response_code(501);
+});
+
+$router->post("/:appname/drains", function ($params) {
+    http_response_code(501);
+});
+
+$router->delete("/:appname/drains", function ($params) {
+    http_response_code(501);
+});
+
+$router->get("/:appname/coworkers", function ($params) {
+    http_response_code(501);
+});
+
+$router->post("/:appname/coworkers", function ($params) {
+    http_response_code(501);
+});
+
+$router->delete("/:appname/coworkers", function ($params) {
     http_response_code(501);
 });
 

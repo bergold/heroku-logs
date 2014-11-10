@@ -10,8 +10,10 @@ class Router {
         $this->path = $path;
     }
     
-    public function when($path, $handler) {
+    public function when($method, $path, $handler) {
         if ($this->matched) return;
+        
+        if (!$this->validateMethod($method)) return;
         
         $route = $this->pathRegExp($path);
         $route['handler'] = $handler;
@@ -24,10 +26,23 @@ class Router {
         }
     }
     
+    public function any($path, $handler) { return $this->when("any"); }
+    public function get($path, $handler) { return $this->when("get"); }
+    public function post($path, $handler) { return $this->when("post"); }
+    public function put($path, $handler) { return $this->when("put"); }
+    public function delete($path, $handler) { return $this->when("delete"); }
+    
     public function otherwise($handler) {
         if ($this->matched) return;
         
         call_user_func($handler);
+    }
+    
+    private function validateMethod($expected) {
+        $expected = strtoupper($expected);
+        $real = strtoupper($_SERVER["REQUEST_METHOD"]);
+        if ($expected == "ANY") return true;
+        return $expected == $real;
     }
     
     private function pathRegExp($path) {
