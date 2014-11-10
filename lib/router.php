@@ -26,11 +26,11 @@ class Router {
         }
     }
     
-    public function any($path, $handler) { return $this->when("any"); }
-    public function get($path, $handler) { return $this->when("get"); }
-    public function post($path, $handler) { return $this->when("post"); }
-    public function put($path, $handler) { return $this->when("put"); }
-    public function delete($path, $handler) { return $this->when("delete"); }
+    public function any($path, $handler) { return $this->when("any", $path, $handler); }
+    public function get($path, $handler) { return $this->when("get", $path, $handler); }
+    public function post($path, $handler) { return $this->when("post", $path, $handler); }
+    public function put($path, $handler) { return $this->when("put", $path, $handler); }
+    public function delete($path, $handler) { return $this->when("delete", $path, $handler); }
     
     public function otherwise($handler) {
         if ($this->matched) return;
