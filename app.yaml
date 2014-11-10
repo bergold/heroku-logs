@@ -15,6 +15,7 @@ handlers:
 - url: /api/.*
   script: bin/apihandler.php
   login: required
+  auth_fail_action: unauthorized
 
 - url: /init
   script: bin/init.php
@@ -26,6 +27,7 @@ handlers:
 - url: /app/
   static_files: web/app.html
   upload: web/app.html
+  login: required
   
 - url: /assets
   static_dir: web/assets
