@@ -63,6 +63,10 @@ $router->delete("/:appname/coworkers", function ($params) {
     http_response_code(501);
 });
 
+$router->post("/:appname/rename", function($params) {
+    http_response_code(501);
+});
+
 $router->otherwise(function () {
     http_response_code(400);
 });
