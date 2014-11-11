@@ -17,7 +17,7 @@ class Logger {
     /// Returns the Socket instance.
     /// Throws an Exception if no Socket instance is set.
     public static function getStorageInstance() {
-        if (self::$storage == null) throw new Exception("No Storage instance sed.");
+        if (self::$storage == null) throw new Exception("No Storage instance set.");
         return self::$storage;
     }
     
