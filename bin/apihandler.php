@@ -51,15 +51,15 @@ $router->delete("/:appname/drains", function ($params) {
     http_response_code(501);
 });
 
-$router->get("/:appname/coworkers", function ($params) {
+$router->get("/:appname/collaborators", function ($params) {
     http_response_code(501);
 });
 
-$router->post("/:appname/coworkers", function ($params) {
+$router->post("/:appname/collaborators", function ($params) {
     http_response_code(501);
 });
 
-$router->delete("/:appname/coworkers", function ($params) {
+$router->delete("/:appname/collaborators", function ($params) {
     http_response_code(501);
 });
 
