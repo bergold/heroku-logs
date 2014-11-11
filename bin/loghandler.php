@@ -14,7 +14,6 @@ if ($app_name === false) {
 }
 
 $data = @file_get_contents("php://input");
-$data = newline_ifabsent($data);
 
 $storage_handle = Storage::fromDefaultBucket("/logs/");
 Logger::setStorageInstance($storage_handle);
@@ -41,7 +40,6 @@ if (!$succeed) {
 }
 
 syslog(LOG_INFO, "Got $msg_count log" . ($msg_count == 1 ? "" : "s") . " from $app_name ($drain_token).");
-syslog(LOG_DEBUG, $data);
 
 http_response_code(204);
 exit(0);
