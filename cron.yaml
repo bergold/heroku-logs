@@ -1,4 +1,4 @@
 cron:
 - description: daily summary job
   url: /api/summary
-  schedule: every 24 hours
+  schedule: every day 00:00
